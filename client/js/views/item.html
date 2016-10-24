@@ -25,7 +25,7 @@
   </div>
   <div class="mdl-dialog__content">
     <input class="user-info__id" type="hidden" value="<%= users[i]._id %>" />
-    <ul class="demo-list-item mdl-list">
+    <ul class="mdl-list">
       <li class="user-info__name mdl-list__item">
         <span class="mdl-list__item-primary-content">
           <%= users[i].name %>
@@ -44,7 +44,7 @@
     </ul>
   </div>
   <div class="mdl-dialog__actions">
-    <button type="button" class="user-info__edit mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Edit</button>
+    <button type="button" data-id="<%= users[i]._id %>" data-name="<%= users[i].name %>" data-phone="<%= users[i].phone %>" data-email="<%= users[i].email %>" class="user-info__edit mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Edit</button>
     <button type="button" class="user-info__delete mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Delete</button>
   </div>
 </dialog>

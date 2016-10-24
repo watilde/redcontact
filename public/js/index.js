@@ -23,18 +23,38 @@ module.exports = function () {
     componentHandler.upgradeDom()
 
     $('.show-user-info').on('click', function () {
-      var index = $('.show-user-info').index(this);
+      var index = $('.show-user-info').index(this)
       var $dialog = document.querySelector('#user-info--' + index)
       $dialog.showModal()
       $('#user-info--' + index).on('click', function () {
         $dialog.close()
       })
+
+      $('.user-info__edit').on('click', function () {
+        var dialog = document.querySelector('#user-edit')
+        var id = $(this).data('id')
+        var name = $(this).data('name')
+        var phone = $(this).data('phone')
+        var email = $(this).data('email')
+
+        $('#user-edit__id').val(id)
+        $('#user-edit__name').val(name)
+        $('#user-edit__phone').val(phone)
+        $('#user-edit__email').val(email)
+        dialog.showModal()
+      })
+
+      $('#user-edit__close').on('click', function () {
+        var dialog = document.querySelector('#user-edit')
+        dialog.close()
+      })
     })
 
     $('.user-info__delete').on('click', function () {
-      var index = $('.user-info__delete').index(this);
+      var index = $('.user-info__delete').index(this)
       var id = $('#user-info--' + index).find('.user-info__id').attr('value')
       users.remove(id).then(function () {
+        window.location.reload()
       })
     })
   })
@@ -43,7 +63,9 @@ module.exports = function () {
     var name = $('#user-add__name').val()
     var phone = $('#user-add__phone').val()
     var email = $('#user-add__email').val()
-    users.new({name: name, phone: phone, email: email}).then(function () {})
+    users.new({name: name, phone: phone, email: email}).then(function () {
+      window.location.reload()
+    })
   })
 
   $('#user-search').on('change', function () {
@@ -51,6 +73,16 @@ module.exports = function () {
     $('#user-list').empty()
     users.search(val).then(function (users) {
       $('#user-list').append(itemTemplate({users: users}))
+    })
+  })
+
+  $('#user-edit__save').on('click', function () {
+    var id = $('#user-edit__id').val()
+    var name = $('#user-edit__name').val()
+    var phone = $('#user-edit__phone').val()
+    var email = $('#user-edit__email').val()
+    users.update({id: id, name: name, phone: phone, email: email}).then(function () {
+      window.location.reload()
     })
   })
 }
@@ -134,10 +166,19 @@ Users.prototype.new = function (data) {
   })
 }
 
+Users.prototype.update = function (data) {
+  var that = this
+  return new Promise(function(resolve, reject) {
+    $.post('/users/update', data, function () {
+      resolve()
+    })
+  })
+}
+
 module.exports = Users
 
 },{"jquery":7}],6:[function(require,module,exports){
-module.exports = "<table class=\"mdl-data-table mdl-data-table--selectable mdl-shadow--2dp\">\n  <tbody>\n    <% for (var i = 0; users.length > i; i++) { %>\n    <tr class=\"show-user-info\">\n      <td><%= users[i].name %></td>\n    </tr>\n    <% } %>\n  </tbody>\n</table>\n\n<% for (var i = 0; users.length > i; i++) { %>\n<dialog id=\"user-info--<%= i %>\" class=\"mdl-dialog\">\n  <div class=\"mdl-layout mdl-js-layout mdl-layout--fixed-header\">\n    <header class=\"mdl-layout__header\">\n      <div class=\"mdl-layout__header-row\">\n        <div id=\"user-add__close\"\n          class=\"mdl-button mdl-js-button mdl-button--icon\">\n          <i class=\"material-icons\">clear</i>\n        </div>\n        <div class=\"mdl-layout-spacer\"></div>\n        <span class=\"mdl-layout-title\">Contact info</span>\n        <div class=\"mdl-layout-spacer\"></div>\n      </div>\n    </header>\n  </div>\n  <div class=\"mdl-dialog__content\">\n    <inpu class=\"user-info__id\" type=\"hidden\" value=\"<%= users[i]._id %>\" />\n    <ul class=\"demo-list-item mdl-list\">\n      <li class=\"mdl-list__item\">\n        <span class=\"mdl-list__item-primary-content\">\n          <%= users[i].name %>\n        </span>\n      </li>\n      <li class=\"mdl-list__item\">\n        <span class=\"mdl-list__item-primary-content\">\n          <%= users[i].phone %>\n        </span>\n      </li>\n      <li class=\"mdl-list__item\">\n        <span class=\"mdl-list__item-primary-content\">\n          <%= users[i].email %>\n        </span>\n      </li>\n    </ul>\n  </div>\n  <div class=\"mdl-dialog__actions\">\n    <button type=\"button\" class=\"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent\">Edit</button>\n    <button type=\"button\" class=\"user-info__delete mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect\">Delete</button>\n  </div>\n</dialog>\n<% } %>\n";
+module.exports = "<table class=\"mdl-data-table mdl-data-table--selectable mdl-shadow--2dp\">\n  <tbody>\n    <% for (var i = 0; users.length > i; i++) { %>\n    <tr class=\"show-user-info\">\n      <td><%= users[i].name %></td>\n    </tr>\n    <% } %>\n  </tbody>\n</table>\n\n<% for (var i = 0; users.length > i; i++) { %>\n<dialog id=\"user-info--<%= i %>\" class=\"mdl-dialog\">\n  <div class=\"mdl-layout mdl-js-layout mdl-layout--fixed-header\">\n    <header class=\"mdl-layout__header\">\n      <div class=\"mdl-layout__header-row\">\n        <div id=\"user-add__close\"\n          class=\"mdl-button mdl-js-button mdl-button--icon\">\n          <i class=\"material-icons\">clear</i>\n        </div>\n        <div class=\"mdl-layout-spacer\"></div>\n        <span class=\"mdl-layout-title\">Contact info</span>\n        <div class=\"mdl-layout-spacer\"></div>\n      </div>\n    </header>\n  </div>\n  <div class=\"mdl-dialog__content\">\n    <input class=\"user-info__id\" type=\"hidden\" value=\"<%= users[i]._id %>\" />\n    <ul class=\"mdl-list\">\n      <li class=\"user-info__name mdl-list__item\">\n        <span class=\"mdl-list__item-primary-content\">\n          <%= users[i].name %>\n        </span>\n      </li>\n      <li class=\"user-info__phone mdl-list__item\">\n        <span class=\"mdl-list__item-primary-content\">\n          <%= users[i].phone %>\n        </span>\n      </li>\n      <li class=\"user-info__email mdl-list__item\">\n        <span class=\"mdl-list__item-primary-content\">\n          <%= users[i].email %>\n        </span>\n      </li>\n    </ul>\n  </div>\n  <div class=\"mdl-dialog__actions\">\n    <button type=\"button\" data-id=\"<%= users[i]._id %>\" data-name=\"<%= users[i].name %>\" data-phone=\"<%= users[i].phone %>\" data-email=\"<%= users[i].email %>\" class=\"user-info__edit mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent\">Edit</button>\n    <button type=\"button\" class=\"user-info__delete mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect\">Delete</button>\n  </div>\n</dialog>\n<% } %>\n";
 
 },{}],7:[function(require,module,exports){
 /*!

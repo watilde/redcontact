@@ -42,4 +42,13 @@ Users.prototype.new = function (data) {
   })
 }
 
+Users.prototype.update = function (data) {
+  var that = this
+  return new Promise(function(resolve, reject) {
+    $.post('/users/update', data, function () {
+      resolve()
+    })
+  })
+}
+
 module.exports = Users
