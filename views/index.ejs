@@ -1,0 +1,85 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dialog-polyfill/0.4.4/dialog-polyfill.min.css">
+    <link rel="stylesheet" href="/css/index.css">
+  </head>
+  <body>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+      <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+          <button id="menu-lower-left"
+            class="mdl-button mdl-js-button mdl-button--icon">
+            <i class="material-icons">list</i>
+          </button>
+          <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
+            for="menu-lower-left">
+            <li class="mdl-menu__item">A - Z</li>
+            <li class="mdl-menu__item">Z - A</li>
+          </ul>
+          <div class="mdl-layout-spacer"></div>
+          <span class="mdl-layout-title">Contacts</span>
+          <div class="mdl-layout-spacer"></div>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
+              mdl-textfield--floating-label mdl-textfield--align-right">
+              <label class="mdl-button mdl-js-button mdl-button--icon"
+                for="user-search">
+                <i class="material-icons">search</i>
+              </label>
+              <div class="mdl-textfield__expandable-holder">
+                <input class="mdl-textfield__input" type="text" name="search"
+                  id="user-search">
+              </div>
+            </div>
+        </div>
+      </header>
+      <main class="mdl-layout__content">
+        <div id="user-list"></div>
+        <button id="show-user-add" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-js-ripple-effect" data-upgraded=",MaterialButton,MaterialRipple">
+          <i class="material-icons">add</i>
+          <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple"></span>
+          </span>
+        </button>
+        <dialog class="mdl-dialog" id="user-add">
+          <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+            <header class="mdl-layout__header">
+              <div class="mdl-layout__header-row">
+                <div id="user-add__close"
+                  class="mdl-button mdl-js-button mdl-button--icon">
+                  <i class="material-icons">clear</i>
+                </div>
+                <div class="mdl-layout-spacer"></div>
+                <span class="mdl-layout-title">Add new contact</span>
+                <div class="mdl-layout-spacer"></div>
+              </div>
+            </header>
+          </div>
+          <div class="mdl-dialog__content">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="text" id="user-add__name">
+              <label class="mdl-textfield__label" for="user-add__name">Name...</label>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="number" id="user-add__phone">
+              <label class="mdl-textfield__label" for="user-add__phone">Phone...</label>
+              <span class="mdl-textfield__error">Input is not a number</span>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="email" id="user-add__email">
+              <label class="mdl-textfield__label" for="user-add__email">Email...</label>
+              <span class="mdl-textfield__error">Input is not a email</span>
+            </div>
+          </div>
+          <div class="mdl-dialog__actions">
+            <button id="user-add__save" type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Save</button>
+          </div>
+        </dialog>
+      </main>
+    </div>
+    <script src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dialog-polyfill/0.4.4/dialog-polyfill.min.js"></script>
+    <script src="/js/index.js"></script>
+  </body>
+</html>

@@ -1,0 +1,51 @@
+<table class="mdl-data-table mdl-data-table--selectable mdl-shadow--2dp">
+  <tbody>
+    <% for (var i = 0; users.length > i; i++) { %>
+    <tr class="show-user-info">
+      <td><%= users[i].name %></td>
+    </tr>
+    <% } %>
+  </tbody>
+</table>
+
+<% for (var i = 0; users.length > i; i++) { %>
+<dialog id="user-info--<%= i %>" class="mdl-dialog">
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="mdl-layout__header">
+      <div class="mdl-layout__header-row">
+        <div id="user-add__close"
+          class="mdl-button mdl-js-button mdl-button--icon">
+          <i class="material-icons">clear</i>
+        </div>
+        <div class="mdl-layout-spacer"></div>
+        <span class="mdl-layout-title">Contact info</span>
+        <div class="mdl-layout-spacer"></div>
+      </div>
+    </header>
+  </div>
+  <div class="mdl-dialog__content">
+    <inpu class="user-info__id" type="hidden" value="<%= users[i]._id %>" />
+    <ul class="demo-list-item mdl-list">
+      <li class="mdl-list__item">
+        <span class="mdl-list__item-primary-content">
+          <%= users[i].name %>
+        </span>
+      </li>
+      <li class="mdl-list__item">
+        <span class="mdl-list__item-primary-content">
+          <%= users[i].phone %>
+        </span>
+      </li>
+      <li class="mdl-list__item">
+        <span class="mdl-list__item-primary-content">
+          <%= users[i].email %>
+        </span>
+      </li>
+    </ul>
+  </div>
+  <div class="mdl-dialog__actions">
+    <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Edit</button>
+    <button type="button" class="user-info__delete mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Delete</button>
+  </div>
+</dialog>
+<% } %>

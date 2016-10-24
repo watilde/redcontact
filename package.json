@@ -1,0 +1,38 @@
+{
+  "name": "user-api",
+  "version": "1.0.0",
+  "description": "Basic RESTful User Management API",
+  "main": "app.js",
+  "author": "Red Hat",
+  "license": "MIT",
+  "scripts": {
+    "start": "node ./app.js",
+    "seed": "node ./seed/seed.js",
+    "test": "./node_modules/mocha/bin/mocha ./tests/accept/*.js --timeout 15000",
+    "build": "npm run build:js && npm run build:less",
+    "build:js": "browserify -t stringify client/js/index.js > public/js/index.js",
+    "build:less": "lessc client/less/index.less public/css/index.css"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "cors": "^2.7.1",
+    "ejs": "^2.5.1",
+    "express": "^4.14.0",
+    "jquery": "^3.1.1",
+    "lodash": "^4.16.4",
+    "marked": "^0.3.6",
+    "mongoose": "^4.5.9",
+    "mongoose-seed": "^0.3.1",
+    "morgan": "^1.7.0",
+    "multer": "^1.2.0",
+    "winston": "^2.2.0"
+  },
+  "devDependencies": {
+    "browserify": "^13.1.1",
+    "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
+    "less": "^2.7.1",
+    "mocha": "^3.0.2",
+    "stringify": "^5.1.0"
+  }
+}
