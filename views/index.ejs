@@ -76,6 +76,41 @@
             <button id="user-add__save" type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Save</button>
           </div>
         </dialog>
+        <dialog class="mdl-dialog" id="user-edit">
+          <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+            <header class="mdl-layout__header">
+              <div class="mdl-layout__header-row">
+                <div id="user-add__close"
+                  class="mdl-button mdl-js-button mdl-button--icon">
+                  <i class="material-icons">clear</i>
+                </div>
+                <div class="mdl-layout-spacer"></div>
+                <span class="mdl-layout-title">Edit contact</span>
+                <div class="mdl-layout-spacer"></div>
+              </div>
+            </header>
+          </div>
+          <div class="mdl-dialog__content">
+            <input class="mdl-textfield__input" type="hidden" id="user-edit__id">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="text" id="user-edit__name">
+              <label class="mdl-textfield__label" for="user-edit__name">Name...</label>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="number" id="user-edit__phone">
+              <label class="mdl-textfield__label" for="user-edit__phone">Phone...</label>
+              <span class="mdl-textfield__error">Input is not a number</span>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="email" id="user-edit__email">
+              <label class="mdl-textfield__label" for="user-edit__email">Email...</label>
+              <span class="mdl-textfield__error">Input is not a email</span>
+            </div>
+          </div>
+          <div class="mdl-dialog__actions">
+            <button id="user-add__save" type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Save</button>
+          </div>
+        </dialog>
       </main>
     </div>
     <script src="https://code.getmdl.io/1.2.1/material.min.js"></script>

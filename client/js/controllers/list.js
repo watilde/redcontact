@@ -41,4 +41,9 @@ module.exports = function () {
       $('#user-list').append(itemTemplate({users: users}))
     })
   })
+
+  $('.user-info__edit').on('click', function () {
+    var dialog = document.querySelector('#user-edit')
+    dialog.showModal();
+  })
 }
